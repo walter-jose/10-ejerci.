@@ -1,0 +1,192 @@
+#1 Generar una muestra de 10 números aleatorios entre -10 y 10
+numeros <- sample(-10:10, 10)
+clasificacion <- character(length(numeros))
+for (i in 1:length(numeros)) {
+  if (numeros[i] > 0) {
+    clasificacion[i] <- "positivo"
+  } else if (numeros[i] < 0) {
+    clasificacion[i] <- "negativo"
+  } else {
+    clasificacion[i] <- "cero"
+  }
+}
+data.frame(Número = numeros, Clasificación = clasificacion)
+
+
+
+
+#2 Generar una lista de 100 números enteros aleatorios entre 1 y 100
+numeros <- sample(1:100, 100, replace = TRUE)
+contador_pares <- 0
+contador_impares <- 0
+for (numero in numeros) {
+  if (numero %% 2 == 0) {
+    cat(numero, "es par\n")
+    contador_pares <- contador_pares + 1
+  } else {
+    cat(numero, "es impar\n")
+    contador_impares <- contador_impares + 1
+  }
+}
+cat("\nCantidad total de números pares:", contador_pares, "\n")
+cat("Cantidad total de números impares:", contador_impares, "\n")
+
+
+
+
+#3 suma de los promeros N numeros
+
+N <- as.numeric(readline("Ingresa un número N: "))
+
+if (is.na(N) || N <= 0) {
+  cat("Por favor, ingresa un número positivo válido.\n")
+} else {
+  
+  suma <- 0
+  
+  for (i in 1:N) {
+    suma <- suma + i
+    cat("Sumando:", i, "Suma acumulada:", suma, "\n")
+  }
+  
+  cat("\nLa suma de los primeros", N, "números es:", suma, "\n")
+}
+
+
+
+#4 numero de fibonaccion
+
+fibonacci <- numeric(20)
+fibonacci[1] <- 0
+fibonacci[2] <- 1
+for (i in 3:20) {
+  fibonacci[i] <- fibonacci[i - 1] + fibonacci[i - 2]
+}
+cat("Los primeros 20 números de Fibonacci son:\n", fibonacci, "\n")
+
+
+
+#5 Calculo de factorial
+
+N <- as.numeric(readline(prompt = "Ingresa un número para calcular su factorial: "))
+factorial <- 1
+for (i in 1:N) {
+  factorial <- factorial * i
+}
+cat("El factorial de", N, "es:", factorial, "\n")
+
+
+
+
+#6 Juego de adivinanza
+
+set.seed(123) 
+numero_secreto <- sample(1:100, 1)
+adivinado <- FALSE
+
+cat("Bienvenido al juego de adivinanza. Intenta adivinar el número entre 1 y 100.\n")
+
+while (!adivinado) {
+  intento <- as.numeric(readline(prompt = "Ingresa tu intento: "))
+  
+  if (is.na(intento)) {
+    cat("Por favor, ingresa un número válido.\n")
+    next
+  }
+  
+  if (intento > numero_secreto) {
+    cat("El número secreto es menor.\n")
+  } else if (intento < numero_secreto) {
+    cat("El número secreto es mayor.\n")
+  } else {
+    cat("¡Correcto! El número secreto era", numero_secreto, "\n")
+    adivinado <- TRUE
+  }
+}
+
+#7 Validacion de contraseña
+
+contraseña_correcta <- "Rpassword"
+intentos <- 3 
+
+cat("Bienvenido al sistema de autenticación.\n")
+
+while (intentos > 0) {
+
+  contraseña <- readline(prompt = "Ingresa la contraseña: ")
+  
+ 
+  if (contraseña == contraseña_correcta) {
+    cat("Contraseña correcta. Acceso concedido.\n")
+    break
+  } else {
+    intentos <- intentos - 1
+    cat("Contraseña incorrecta. Te quedan", intentos, "intentos.\n")
+    
+
+    if (intentos == 0) {
+      cat("Cuenta bloqueada. Has agotado todos los intentos.\n")
+    }
+  }
+}
+
+
+
+# 8. Suma de dígitos de un número en R
+
+numero <- as.numeric(readline(prompt = "Ingresa un número entero: "))
+
+if (is.na(numero) || numero < 0) {
+  cat("Por favor, ingresa un número entero positivo válido.\n")
+} else {
+  suma_digitos <- 0 
+
+  while (numero > 0) {
+    suma_digitos <- suma_digitos + (numero %% 10) 
+    numero <- numero %/% 10
+  }
+
+  cat("La suma de los dígitos es:", suma_digitos, "\n")
+}
+
+
+
+
+
+# 9. Impresión de patrón en R
+
+filas <- as.numeric(readline(prompt = "Ingresa el número de filas para el patrón: "))
+
+if (is.na(filas) || filas <= 0) {
+  cat("Por favor, ingresa un número entero positivo válido para las filas.\n")
+} else {
+
+  for (i in 1:filas) {
+    cat(strrep("*", i), "\n")
+  }
+}
+
+
+
+
+#10 numeros primos
+
+es_primo <- function(num) {
+  if (num <= 1) {
+    return(FALSE)
+  }
+  for (i in 2:sqrt(num)) {
+    if (num %% i == 0) {
+      return(FALSE)
+    }
+  }
+  return(TRUE)
+}
+
+cat("Números primos entre 1 y 100:\n")
+for (num in 1:100) {
+  if (es_primo(num)) {
+    cat(num, " ")
+  }
+}
+cat("\n")
